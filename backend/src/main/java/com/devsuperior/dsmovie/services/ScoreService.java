@@ -27,6 +27,7 @@ public class ScoreService {
 	
 	@Transactional
 	public MovieDTO saveScore(ScoreDTO dto) {
+		
 		User user = userRepository.findByEmail(dto.getEmail());
 		if (user == null) {
 			user = new User();
@@ -47,7 +48,7 @@ public class ScoreService {
 		for (Score s : movie.getScores()) {
 			sum = sum + s.getValue();
 		}
-		
+			
 		double avg = sum / movie.getScores().size();
 		
 		movie.setScore(avg);
@@ -55,8 +56,6 @@ public class ScoreService {
 		
 		movie = movieRepository.save(movie);
 		
-		return new MovieDTO(movie);	
-	
+		return new MovieDTO(movie);
 	}
-
 }
